@@ -5,7 +5,7 @@ package com.shawn.finance.fsmdemo.fsm.events;
  */
 public enum UserEvents {
     EVENT_APPLY,
-    EVENT_APPLY_SUCCESS,
-    EVENT_APPLY_FAIL,
-    EVENT_ACTIVE,
+//    EVENT_APPLY_SUCCESS,
+//    EVENT_APPLY_FAIL,
+//    EVENT_ACTIVE,
 }
