@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachine;
+import org.springframework.statemachine.config.EnableStateMachineFactory;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
@@ -20,7 +21,7 @@ import java.util.EnumSet;
  * Created by shawn on 15/12/29.
  */
 @Configuration
-@EnableStateMachine
+@EnableStateMachineFactory
 public class UserStateMachineConfig extends EnumStateMachineConfigurerAdapter<UserStates, UserEvents>{
 //    private static Logger logger = LoggerFactory
 
