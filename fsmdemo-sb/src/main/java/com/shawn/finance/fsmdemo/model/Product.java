@@ -1,6 +1,6 @@
 package com.shawn.finance.fsmdemo.model;
 
-import com.shawn.finance.fsmdemo.dao.ProductDao;
+import com.shawn.finance.fsmdemo.dao.mapper.ProductMapper;
 import com.shawn.finance.fsmdemo.fsm.Events;
 import com.shawn.finance.fsmdemo.fsm.States;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class Product {
     private static StateMachine<States, Events> stateMachine;
 
     @Autowired
-    private static ProductDao productDao;
+    private static ProductMapper productDao;
 
     private Product(){};
 
