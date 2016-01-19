@@ -42,17 +42,54 @@ public class UserStateMachineConfig extends EnumStateMachineConfigurerAdapter<St
     @Override
     public void configure(StateMachineStateConfigurer<States, Events> stateConfigurer) throws Exception{
         stateConfigurer.withStates()
-                .initial(States.STATE_INIT)
+                .initial(States.STATE_INIT,null)
                 .states(EnumSet.allOf(States.class));
     }
 
     @Override
     public void configure(StateMachineTransitionConfigurer<States, Events> transitionConfigurer) throws Exception{
-        transitionConfigurer.withExternal()
+        transitionConfigurer
+                .withExternal()
                 .source(States.STATE_INIT)
                 .target(States.STATE_APPLYING)
                 .event(Events.EVENT_APPLY)
-                .action(doApply());
+                .action(doApply())
+                .and()
+                .withExternal()
+                .source(States.STATE_APPLYING)
+                .target(States.STATE_APPLIED)
+                .event(Events.EVENT_APPLY_SUCCESS)
+                .action(doApplySuccess())
+                .and()
+                .withExternal()
+                .source(States.STATE_APPLYING)
+                .target(States.STATE_INIT)
+                .event(Events.EVENT_APPLY_FAIL)
+                .action(doApplyFail())
+                .and()
+                .withExternal()
+                .source(States.STATE_APPLIED)
+                .target(States.STATE_ACTIVING)
+                .event(Events.EVENT_ACTIVE)
+                .action(doActive())
+                .and()
+                .withExternal()
+                .source(States.STATE_ACTIVING)
+                .target(States.STATE_NORMAL)
+                .event(Events.EVENT_ACTIVE_SUCCESS)
+                .action(doActiveSuccess())
+                .and()
+                .withExternal()
+                .source(States.STATE_ACTIVING)
+                .target(States.STATE_APPLIED)
+                .event(Events.EVENT_ACTIVE_FAIL)
+                .action(doActiveFail())
+                .and()
+                .withExternal()
+                .source(States.STATE_NORMAL)
+                .target(States.STATE_OVERDUED)
+                .event(Events.EVENT_OVERDUED)
+                .action(doOverDued());
     }
 
 
@@ -62,6 +99,22 @@ public class UserStateMachineConfig extends EnumStateMachineConfigurerAdapter<St
         return new StateMachineListenerAdapter<States, Events>(){
             @Override
             public void stateChanged(State<States, Events> from, State<States, Events> to){
+                if (null == from){
+                    logger.warn("FROM is NULL");
+                    if (null != to){
+                        logger.warn("TO:[{}]", to.getId());
+                    }
+                    return;
+                }
+
+                if (null == to){
+                    if (null != from){
+                        logger.warn("FROM:[{}]", from.getId());
+                    }
+                    logger.warn("TO is NULL");
+                    return;
+                }
+
                 logger.debug("FROM state[{}] to [{}]", from.toString(), to.toString());
             }
         };
@@ -76,4 +129,65 @@ public class UserStateMachineConfig extends EnumStateMachineConfigurerAdapter<St
             }
         };
     }
+
+    @Bean
+    public Action<States, Events> doApplySuccess(){
+        return new Action<States, Events>() {
+            @Override
+            public void execute(StateContext<States, Events> context) {
+                logger.warn("Event:[{}]", context.getEvent().toString());
+            }
+        };
+    }
+
+    @Bean
+    public Action<States, Events> doApplyFail(){
+        return new Action<States, Events>() {
+            @Override
+            public void execute(StateContext<States, Events> context) {
+                logger.warn("Event:[{}]", context.getEvent().toString());
+            }
+        };
+    }
+
+    @Bean
+    public Action<States, Events> doActive(){
+        return new Action<States, Events>() {
+            @Override
+            public void execute(StateContext<States, Events> context) {
+                logger.warn("Event:[{}]", context.getEvent().toString());
+            }
+        };
+    }
+
+    @Bean
+    public Action<States, Events> doActiveSuccess(){
+        return new Action<States, Events>() {
+            @Override
+            public void execute(StateContext<States, Events> context) {
+                logger.warn("Event:[{}]", context.getEvent().toString());
+            }
+        };
+    }
+
+    @Bean
+    public Action<States, Events> doActiveFail(){
+        return new Action<States, Events>() {
+            @Override
+            public void execute(StateContext<States, Events> context) {
+                logger.warn("Event:[{}]", context.getEvent().toString());
+            }
+        };
+    }
+
+    @Bean
+    public Action<States, Events> doOverDued(){
+        return new Action<States, Events>() {
+            @Override
+            public void execute(StateContext<States, Events> context) {
+                logger.warn("Event:[{}]", context.getEvent().toString());
+            }
+        };
+    }
+
 }

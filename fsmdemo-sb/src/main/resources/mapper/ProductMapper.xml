@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shawn.finance.fsmdemo.dao.ProductMapper">
+    <resultMap id="ProductDao" type="com.shawn.finance.fsmdemo.model.po.Product">
+        <id column="id" javaType="Long" property="id"/>
+        <id column="state" javaType="com.shawn.finance.fsmdemo.fsm.States"/>
+        <id column="last_event" javaType="com.shawn.finance.fsmdemo.fsm.Events"/>
+    </resultMap>
+
+    <insert id="addProduct">
+        INSERT INTO tbl_product (state, last_event) VALUES (0, 0);
+    </insert>
+
+    <select id="getById" resultMap="ProductDao">
+        SELECT * FROM `tbl_product` WHERE `id` = '#{id}';
+    </select>
+
+    <select id="getStateById">
+        SELECT state FROM `tbl_product` WHERE `id` = '#{id}';
+    </select>
+
+    <update id="updateState">
+        UPDATE tbl_product SET state = '#{state}', last_event = '#{lastEvent}' WHERE id = '#{id}';
+    </update>
+</mapper>

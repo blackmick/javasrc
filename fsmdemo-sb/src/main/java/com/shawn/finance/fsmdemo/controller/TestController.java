@@ -5,8 +5,10 @@ import com.shawn.finance.fsmdemo.fsm.States;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineFactory;
+import org.springframework.statemachine.support.DefaultStateMachineContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -14,26 +16,24 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/test")
 public class TestController {
-//    @Autowired
-//    StateMachineFactory<States, Events> stateMachineFactory;
 
     @Autowired
     private StateMachine<States, Events> stateMachine;
 
-//    public TestController(){
-//        if (stateMachineFactory == null){
-//            System.out.println("stateMachineFactory is null");
-//            return;
-//        }
-//        stateMachine = stateMachineFactory.getStateMachine();
-//        stateMachine.start();
-//    }
+    @RequestMapping("/test")
+    public String test(@RequestParam("source") String source, @RequestParam("event") String event){
+        States ss = States.valueOf(source.toUpperCase());
+        Events e = Events.valueOf(event.toUpperCase());
 
-    @RequestMapping("/")
-    public String test(){
-        stateMachine.sendEvent(Events.EVENT_APPLY);
-        return "Shit web";
+        if (ss == null || e == null){
+            return "Wrong source or event";
+        }
+
+        stateMachine.getStateMachineAccessor().withRegion().resetStateMachine(new DefaultStateMachineContext<States, Events>(ss, null, null, null));
+
+        stateMachine.start();
+        stateMachine.sendEvent(e);
+        return stateMachine.getState().toString();
     }
 }

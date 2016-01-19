@@ -10,6 +10,6 @@ public enum States{
     STATE_APPLIED,
     STATE_ACTIVING,
     STATE_NORMAL,
-    STATE_OVERDUED
+    STATE_OVERDUED;
 };
 
