@@ -2,11 +2,12 @@ package com.shawn.finance.fsmdemo.controller;
 
 import com.shawn.finance.fsmdemo.fsm.Events;
 import com.shawn.finance.fsmdemo.fsm.States;
+import com.shawn.finance.fsmdemo.model.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.statemachine.StateMachine;
-import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.statemachine.support.DefaultStateMachineContext;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,14 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
+    private static Logger logger = LoggerFactory.getLogger(TestController.class);
 
     @Autowired
     private StateMachine<States, Events> stateMachine;
 
     @RequestMapping("/test")
-    public String test(@RequestParam("source") String source, @RequestParam("event") String event){
+    public String test(
+            @RequestParam("source") String source,
+            @RequestParam("event") String event,
+            @RequestParam("id") Long id
+    ){
         States ss = States.valueOf(source.toUpperCase());
         Events e = Events.valueOf(event.toUpperCase());
+
+        Product product = Product.getProduct(id);
+
+        logger.warn("get product[{}]:[{}]", id, product.toString());
 
         if (ss == null || e == null){
             return "Wrong source or event";
