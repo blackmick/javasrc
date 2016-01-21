@@ -12,6 +12,7 @@ import org.springframework.statemachine.support.DefaultStateMachineContext;
  */
 public class Product {
     private static StateMachine<States, Events> stateMachine;
+    private final PersistStateMachineHandler
 
     @Autowired
     private static ProductMapper productDao;
