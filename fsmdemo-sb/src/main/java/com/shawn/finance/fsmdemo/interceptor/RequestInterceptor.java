@@ -2,6 +2,7 @@ package com.shawn.finance.fsmdemo.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by shawn on 16/1/18.
  */
-@Component
+
 public class RequestInterceptor extends HandlerInterceptorAdapter {
     private static Logger logger = LoggerFactory.getLogger(RequestInterceptor.class);
     private static NamedThreadLocal<Long> TL_TIMING = new NamedThreadLocal<Long>("Timing");

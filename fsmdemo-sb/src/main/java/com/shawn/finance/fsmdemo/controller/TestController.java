@@ -2,7 +2,8 @@ package com.shawn.finance.fsmdemo.controller;
 
 import com.shawn.finance.fsmdemo.fsm.Events;
 import com.shawn.finance.fsmdemo.fsm.States;
-import com.shawn.finance.fsmdemo.model.Product;
+import com.shawn.finance.fsmdemo.model.po.Product;
+import com.shawn.finance.fsmdemo.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class TestController {
         States ss = States.valueOf(source.toUpperCase());
         Events e = Events.valueOf(event.toUpperCase());
 
-        Product product = Product.getProduct(id);
+        Product product = ProductService.getProduct(id);
 
         logger.warn("get product[{}]:[{}]", id, product.toString());
 

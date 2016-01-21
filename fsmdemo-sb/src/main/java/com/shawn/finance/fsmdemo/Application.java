@@ -1,5 +1,6 @@
 package com.shawn.finance.fsmdemo;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,7 +17,8 @@ import org.springframework.context.annotation.ComponentScan;
 //@ComponentScan
 @EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan
+@ComponentScan(basePackages = "com.shawn.finance.fsmdemo")
+@MapperScan(basePackages = "com.shawn.finance.fsmdemo.dao.mapper")
 public class Application {
     public static void main(String [] args){
         SpringApplication.run(Application.class);

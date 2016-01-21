@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * Created by shawn on 16/1/19.
  */
 @Configuration
-@MapperScan("com.shawn.finance.fsmdemo.dao.mapper")
+
 public class DataSourceConfig {
     private static Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
 
@@ -61,7 +61,7 @@ public class DataSourceConfig {
     }
 
 //    @Bean
-//    public MapperFactoryBean productMapper(){
+//    public MapperFactoryBean productDao(){
 //        return getMapper(ProductMapper.class);
 //    }
 }

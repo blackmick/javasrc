@@ -5,6 +5,7 @@ import com.shawn.finance.fsmdemo.model.po.Product;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by shawn on 16/1/18.
