@@ -33,7 +33,9 @@ public class TestController {
         States ss = States.valueOf(source.toUpperCase());
         Events e = Events.valueOf(event.toUpperCase());
 
-        Product product = ProductService.getProduct(id);
+
+        ProductService productService = new ProductService();
+        Product product = productService.getProduct(id);
 
         logger.warn("get product[{}]:[{}]", id, product.toString());
 
