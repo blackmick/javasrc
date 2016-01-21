@@ -5,13 +5,11 @@ import com.shawn.finance.fsmdemo.model.po.Product;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by shawn on 16/1/18.
  */
 
-@Component
 public interface ProductMapper {
     @Insert("INSERT INTO tbl_product (state, last_event) VALUES (#{state}, #{lastEvent})")
     void addProduct(Product product);

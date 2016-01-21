@@ -15,12 +15,16 @@ public class Product {
     private final PersistStateMachineHandler
 
     @Autowired
-    private static ProductMapper productDao;
+    private ProductMapper productDao;
+
+    private com.shawn.finance.fsmdemo.model.po.Product product = null;
 
     private Product(){};
 
-    public static com.shawn.finance.fsmdemo.model.po.Product getProduct(long id){
-        return productDao.getById(id);
+    public static Product getProduct(long id){
+        Product product = new Product();
+        product.load(id);
+        return product;
     };
 
     public void setState(States state){
@@ -31,4 +35,13 @@ public class Product {
         stateMachine.start();
         return stateMachine.sendEvent(event);
     };
+
+    public void load(Long id){
+        product = productDao.getById(id);
+    }
+
+    @Override
+    public String toString(){
+        return this.product.toString();
+    }
 }
