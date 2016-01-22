@@ -5,11 +5,21 @@ package com.shawn.finance.fsmdemo.fsm;
  */
 
 public enum States{
-    STATE_INIT,
-    STATE_APPLYING,
-    STATE_APPLIED,
-    STATE_ACTIVING,
-    STATE_NORMAL,
-    STATE_OVERDUED;
+    STATE_INIT (0),
+    STATE_APPLYING (1),
+    STATE_APPLIED (2),
+    STATE_ACTIVING (3),
+    STATE_NORMAL (4),
+    STATE_OVERDUED (5);
+
+    private int idx;
+
+    States(int idx){
+        this.idx = idx;
+    }
+
+    public int getIdx(){
+        return this.idx;
+    }
 };
 

@@ -16,8 +16,9 @@ import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 //@ComponentScan
-@EnableAutoConfiguration
-@ComponentScan(basePackages = "com.shawn.finance.fsmdemo")
+//@EnableAutoConfiguration
+@SpringBootApplication
+
 public class Application {
     public static void main(String [] args){
         SpringApplication.run(Application.class);

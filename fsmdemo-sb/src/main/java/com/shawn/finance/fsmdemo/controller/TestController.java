@@ -22,6 +22,9 @@ public class TestController {
     private static Logger logger = LoggerFactory.getLogger(TestController.class);
 
     @Autowired
+    private ProductService productService;
+
+    @Autowired
     private StateMachine<States, Events> stateMachine;
 
     @RequestMapping("/test")
@@ -34,7 +37,7 @@ public class TestController {
         Events e = Events.valueOf(event.toUpperCase());
 
 
-        ProductService productService = new ProductService();
+//        ProductService productService = new ProductService();
         Product product = productService.getProduct(id);
 
         logger.warn("get product[{}]:[{}]", id, product.toString());
