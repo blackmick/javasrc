@@ -4,6 +4,7 @@ import com.shawn.finance.fsmdemo.fsm.Events;
 import com.shawn.finance.fsmdemo.fsm.States;
 import com.shawn.finance.fsmdemo.model.po.Product;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.EnumOrdinalTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
 /**
@@ -20,7 +21,7 @@ public interface ProductMapper {
     @Results(
             {
                     @Result(id = true, column = "id", property = "id", javaType = Long.class, jdbcType = JdbcType.BIGINT),
-                    @Result(column = "state", property = "state", javaType = States.class, jdbcType = JdbcType.INTEGER),
+                    @Result(column = "state", property = "state", javaType = States.class, jdbcType = JdbcType.INTEGER, typeHandler = ),
                     @Result(column = "last_event", property = "lastEvent", javaType = Events.class, jdbcType = JdbcType.INTEGER)
             }
     )
