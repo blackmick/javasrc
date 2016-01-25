@@ -9,29 +9,29 @@ import com.shawn.finance.fsmdemo.fsm.States;
 public class Product {
     private Long id;
     private States state;
-    private Events event;
+    private Events lastEvent;
 
-    void setId(Long id){
+    public void setId(Long id){
         this.id = id;
     }
 
-    Long getId(){
+    public Long getId(){
         return id;
     }
 
-    void setState(States s){
+    public void setState(States s){
         this.state = s;
     }
 
-    States getState(){
+    public States getState(){
         return this.state;
     }
 
-    void setEvent(Events ev){
-        this.event = ev;
+    public void setLastEvent(Events ev){
+        this.lastEvent = ev;
     }
 
-    Events getEvent(){
-        return this.event;
+    public Events getLastEvent(){
+        return this.lastEvent;
     }
 }

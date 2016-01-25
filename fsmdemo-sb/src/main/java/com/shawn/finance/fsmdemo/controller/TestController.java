@@ -24,8 +24,8 @@ public class TestController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private StateMachine<States, Events> stateMachine;
+//    @Autowired
+//    private StateMachine<States, Events> stateMachine;
 
     @RequestMapping("/test")
     public String test(
@@ -36,20 +36,19 @@ public class TestController {
         States ss = States.valueOf(source.toUpperCase());
         Events e = Events.valueOf(event.toUpperCase());
 
-
-//        ProductService productService = new ProductService();
-        Product product = productService.getProduct(id);
-
-        logger.warn("get product[{}]:[{}]", id, product.toString());
-
         if (ss == null || e == null){
             return "Wrong source or event";
         }
 
-        stateMachine.getStateMachineAccessor().withRegion().resetStateMachine(new DefaultStateMachineContext<States, Events>(ss, null, null, null));
+        Product product = productService.getProduct(id);
+        productService.setState(ss);
+        productService.sendEvent(e);
 
-        stateMachine.start();
-        stateMachine.sendEvent(e);
-        return stateMachine.getState().toString();
+//        stateMachine.getStateMachineAccessor().withRegion().resetStateMachine(new DefaultStateMachineContext<States, Events>(ss, null, null, null));
+
+//        stateMachine.start();
+//        stateMachine.sendEvent(e);
+//        return stateMachine.getState().toString();
+        return "OK";
     }
 }
