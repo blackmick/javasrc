@@ -24,6 +24,6 @@ public class AssetManagerController {
         manager.setBankAccount("0111222321203");
         managers.add(manager);
 
-        return new ModelAndView("/assetmanager/list", "managers", managers);
+        return new ModelAndView("assetmanager/list", "managers", managers);
     }
 }

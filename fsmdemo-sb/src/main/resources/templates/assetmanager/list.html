@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Asset Manager List</title>
+</head>
+<body>
+<p>heellllsiso</p>
+<p text="#{managers.get(0).getName()}"></p>
+<tr th:each="manager : ${managers}">
+    <td th:text="${manager.name}">Onions</td>
+    <td th:text="${manager.bankName}">2.41</td>
+    <td th:text="${manager.branchBankName}">yes</td>
+</tr>
+</body>
+</html>
