@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Asset Manager List</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/js/jquery-2.2.0.js}"/>
 </head>
 <body>
-<p>heellllsiso</p>
-<p text="#{managers.get(0).getName()}"></p>
-<tr th:each="manager : ${managers}">
-    <td th:text="${manager.name}">Onions</td>
-    <td th:text="${manager.bankName}">2.41</td>
-    <td th:text="${manager.branchBankName}">yes</td>
-</tr>
+<table>
+    <thead>
+    <form>
+        <label>管理人</label>
+    </form>
+    <tr>
+        <th>管理人名称</th>
+        <th>管理人银行名</th>
+        <th>管理人分行名</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="manager : ${managers}">
+        <td th:text="${manager.name}">Onions</td>
+        <td th:text="${manager.bankName}">2.41</td>
+        <td th:text="${manager.branchBankName}">yes</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

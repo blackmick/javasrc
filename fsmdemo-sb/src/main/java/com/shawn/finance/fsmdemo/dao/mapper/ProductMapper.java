@@ -11,8 +11,6 @@ import org.apache.ibatis.type.JdbcType;
 /**
  * Created by shawn on 16/1/18.
  */
-//@Component
-//    @Repository("productDao")
 public interface ProductMapper {
 
     @Insert("INSERT INTO tbl_product (state, last_event) VALUES (#{state, typeHandler=com.shawn.finance.fsmdemo.dao.typehandler.EnumStateTypeHandler}, #{lastEvent, typeHandler=com.shawn.finance.fsmdemo.dao.typehandler.EnumEventTypeHandler})")

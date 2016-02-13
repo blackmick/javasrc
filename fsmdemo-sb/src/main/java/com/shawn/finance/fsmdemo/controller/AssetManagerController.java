@@ -1,6 +1,8 @@
 package com.shawn.finance.fsmdemo.controller;
 
 import com.shawn.finance.fsmdemo.model.AssetManager;
+import com.shawn.finance.fsmdemo.service.AssetManagerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,16 +15,12 @@ import java.util.ArrayList;
  */
 @Controller
 public class AssetManagerController {
+    @Autowired
+    AssetManagerService assetManagerService;
+
     @RequestMapping(value="/assetmanager/list", method = RequestMethod.GET)
     public ModelAndView list(){
-        ArrayList<AssetManager> managers = new ArrayList<AssetManager>();
-        AssetManager manager = new AssetManager();
-        manager.setId(Long.valueOf(1000));
-        manager.setName("Testname");
-        manager.setBankName("TestBank");
-        manager.setBranchBankName("Brank bank");
-        manager.setBankAccount("0111222321203");
-        managers.add(manager);
+        ArrayList<AssetManager> managers = (ArrayList<AssetManager>) assetManagerService.getList(0, 10);
 
         return new ModelAndView("assetmanager/list", "managers", managers);
     }
