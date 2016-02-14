@@ -3,29 +3,52 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Asset Manager List</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>资产管理人列表</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap/dist/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/js/jquery-2.2.0.js}"/>
+    <link rel="stylesheet" href="/fsmdemo/static/css/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/fsmdemo/static/js/jquery-2.2.0.js"/>
 </head>
 <body>
-<table>
-    <thead>
-    <form>
-        <label>管理人</label>
+<div class="container">
+
+    <form id="query-form" class="form-inline">
+        <div class="form-group">
+            <label for="assetName">管理人</label>
+            <input type="text" id="assetName" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="bankName">管理人银行</label>
+            <input type="text" id="bankName" class="form-control"/>
+        </div>
+
+        <input type="submit" value="查询" class="btn btn-default"/>
     </form>
-    <tr>
-        <th>管理人名称</th>
-        <th>管理人银行名</th>
-        <th>管理人分行名</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="manager : ${managers}">
-        <td th:text="${manager.name}">Onions</td>
-        <td th:text="${manager.bankName}">2.41</td>
-        <td th:text="${manager.branchBankName}">yes</td>
-    </tr>
-    </tbody>
-</table>
+
+    <div>
+        <button class="btn btn-default">创建资产管理人</button>
+    </div>
+
+    <div class="table">
+        <table class="table table-bordered">
+            <thead>
+            <tr class="info">
+                <th>管理人名称</th>
+                <th>管理人银行名</th>
+                <th>管理人分行名</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="manager : ${managers}">
+                <td th:text="${manager.name}">Onions</td>
+                <td th:text="${manager.bankName}">2.41</td>
+                <td th:text="${manager.branchBankName}">yes</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
 </body>
 </html>
