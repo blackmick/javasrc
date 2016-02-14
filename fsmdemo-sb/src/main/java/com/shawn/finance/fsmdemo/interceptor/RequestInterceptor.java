@@ -30,7 +30,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
         throws Exception{
         try {
             long cost = System.currentTimeMillis() - TL_TIMING.get();
-            logger.warn("REQUEST URI:[{}] cost:[{}]", request.getRequestURI(), cost);
+            logger.debug("REQUEST URI:[{}] cost:[{}]", request.getRequestURI(), cost);
         }finally {
             TL_TIMING.remove();
         }
