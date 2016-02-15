@@ -20,6 +20,7 @@ public class ExcelService {
 
     public boolean write2Excel(List<Asset> list,String fileName, boolean refresh){
         if (!refresh && isExcelFileExist(fileName)){
+            logger.warn("refresh is false, but the file[{}] is exist, exit", fileName);
             return false;
         }
 
@@ -27,19 +28,29 @@ public class ExcelService {
             Workbook workbook = new XSSFWorkbook();
 
             Sheet sheet = workbook.createSheet();
-
+            short rowIdx = 0;
+            short cellIdx = 0;
             for (Asset asset : list){
-                Row row = sheet.createRow(sheet.getLastRowNum());
-                Cell cell = row.createCell(row.getLastCellNum());
-                cell.setCellValue(1);
+                Row row = sheet.createRow(rowIdx);
+                cellIdx = 0;
+                {
+                    Cell cell = row.createCell(cellIdx);
+                    cell.setCellValue(2);
+                    cellIdx++;
+                }
+                rowIdx++;
             }
+
+            File outputFile = new File(fileName);
+            if (!outputFile.exists())
+                outputFile.createNewFile();
             
-            FileOutputStream fos = new FileOutputStream(fileName);
+            FileOutputStream fos = new FileOutputStream(outputFile);
             workbook.write(fos);
             fos.close();
             workbook.close();
         }catch (Exception e){
-            e.getMessage();
+            logger.warn(e.getMessage());
         }
         return true;
     }
