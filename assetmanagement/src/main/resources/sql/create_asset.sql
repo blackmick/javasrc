@@ -1,13 +1,13 @@
-USE fsmdemo;
+USE asset_management;
 
 DROP TABLE IF EXISTS tbl_asset_manager;
 
 CREATE TABLE tbl_asset_manager(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL DEFAULT '',
-  `bank_name` VARCHAR(45) NOT NULL DEFAULT '',
-  `branch_bank_name` VARCHAR(45) NOT NULL DEFAULT '',
-  `bank_card` VARCHAR(45) NOT NULL DEFAULT '',
+  `name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '资产管理人名称',
+  `bank_name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '资产管理人银行名称',
+  `branch_bank_name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '资产管理人银行分行名称',
+  `bank_card` VARCHAR(45) NOT NULL DEFAULT ''COMMENT '资产管理人银行账号',
   `bank_card_type` INT(11) NOT NULL DEFAULT '0',
   `create_time` DATETIME DEFAULT NULL,
   `update_time` DATETIME DEFAULT NULL,
@@ -26,7 +26,7 @@ VALUES ('AM TEST3', 'AM BANK 3', 'AM BRANCH 3', '12543555665544', NOW(), NOW());
 
 
 -- 资产管理计划
-
+DROP TABLE IF EXISTS tbl_asset_plan;
 CREATE TABLE tbl_asset_plan(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `am_id` BIGINT(20) NOT NULL COMMENT '资产管理人id',
@@ -43,7 +43,6 @@ CREATE TABLE tbl_asset_plan(
 -- 以核心的分期借据为维度整合核心的数据,此表将作为资产明细查询,标注,导出,导入核心的主要数据模型
 
 DROP TABLE IF EXISTS tbl_asset_detail;
-
 CREATE TABLE tbl_asset_detail(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `ap_id` BIGINT(20) NOT NULL COMMENT '资产管理计划id',
@@ -57,8 +56,8 @@ CREATE TABLE tbl_asset_detail(
   `unrepay` DOUBLE NOT NULL DEFAULT '0.0' COMMENT '未还金额',
   `repay_type` INT(11) NOT NULL DEFAULT '0' COMMENT '还款方式:0-等额本息,1-等额本金,2-先高后低',
 #   `corp_name` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '合作机构',
-  `c_id` BIGINT(20) NOT NULL DEFAULT '' COMMENT '客户id',
-  `corp_id` BIGINT(20) NOT NULL DEFAULT '0' COMMENT '商户id',
+  `c_id` BIGINT(20) NOT NULL COMMENT '客户id',
+  `corp_id` BIGINT(20) NOT NULL COMMENT '商户id',
   `scene` VARCHAR(32) NOT NULL DEFAULT '' COMMENT '场景',
   `loan_time` DATETIME NOT NULL COMMENT '放款时间',
   `loan_amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '贷款金额',
@@ -83,6 +82,7 @@ CREATE TABLE tbl_asset_detail(
 
 
 -- 客户信息
+DROP TABLE IF EXISTS tbl_asset_customer;
 CREATE TABLE tbl_asset_customer(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '客户名称',
@@ -98,10 +98,11 @@ CREATE TABLE tbl_asset_customer(
 
 
 -- 商户信息
+DROP TABLE IF EXISTS tbl_merchant;
 CREATE TABLE tbl_merchant(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(120) NOT NULL DEFAULT '' COMMENT '商户总公司名称',
-  `branch_name` VARCHAR(200) NOT NULL DEFAULT '商户分公司名称',
+  `branch_name` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '商户分公司名称',
   `create_time` DATETIME NOT NULL,
   `update_time` DATETIME NOT NULL,
   `status` INT(11) NOT NULL DEFAULT '0',
@@ -110,6 +111,7 @@ CREATE TABLE tbl_merchant(
 
 -- 合作机构表
 -- 出表方
+DROP TABLE IF EXISTS tbl_corp;
 CREATE TABLE tbl_corp(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '合作机构名',
