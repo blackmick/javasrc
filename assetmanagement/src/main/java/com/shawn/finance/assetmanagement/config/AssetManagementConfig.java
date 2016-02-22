@@ -1,6 +1,7 @@
 package com.shawn.finance.assetmanagement.config;
 
 import com.shawn.finance.assetmanagement.interceptor.RequestInterceptor;
+import com.sun.xml.internal.fastinfoset.sax.Properties;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;

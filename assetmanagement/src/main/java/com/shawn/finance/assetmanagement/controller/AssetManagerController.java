@@ -4,6 +4,7 @@ import com.shawn.finance.assetmanagement.model.AssetManager;
 import com.shawn.finance.assetmanagement.service.AssetManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +39,18 @@ public class AssetManagerController {
 
     @RequestMapping(value = "/assetmanager/add", method = RequestMethod.POST)
     public ModelAndView add(@RequestParam("managerName")String name){
+        //TODO: add new manager
+
+        return new ModelAndView("redirect:/assetmanager/list");
+    }
+
+    @RequestMapping(value = "/assetmanager/modify", method = RequestMethod.GET)
+    public ModelAndView modify(){
+        return new ModelAndView("assetmanager/add");
+    }
+
+    @RequestMapping(value = "/assetmanager/modify", method = RequestMethod.POST)
+    public ModelAndView modify(@RequestParam("managerName")String name){
         //TODO: add new manager
 
         return new ModelAndView("redirect:/assetmanager/list");

@@ -4,10 +4,10 @@ DROP TABLE IF EXISTS tbl_asset_manager;
 
 CREATE TABLE tbl_asset_manager(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL DEFAULT '资产管理人名称',
-  `bank_name` VARCHAR(45) NOT NULL DEFAULT '资产管理人银行名称',
-  `branch_bank_name` VARCHAR(45) NOT NULL DEFAULT '资产管理人银行分行名称',
-  `bank_card` VARCHAR(45) NOT NULL DEFAULT '资产管理人银行账号',
+  `name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '资产管理人名称',
+  `bank_name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '资产管理人银行名称',
+  `branch_bank_name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '资产管理人银行分行名称',
+  `bank_card` VARCHAR(45) NOT NULL DEFAULT ''COMMENT '资产管理人银行账号',
   `bank_card_type` INT(11) NOT NULL DEFAULT '0',
   `create_time` DATETIME DEFAULT NULL,
   `update_time` DATETIME DEFAULT NULL,
@@ -102,7 +102,7 @@ DROP TABLE IF EXISTS tbl_merchant;
 CREATE TABLE tbl_merchant(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(120) NOT NULL DEFAULT '' COMMENT '商户总公司名称',
-  `branch_name` VARCHAR(200) NOT NULL DEFAULT '商户分公司名称',
+  `branch_name` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '商户分公司名称',
   `create_time` DATETIME NOT NULL,
   `update_time` DATETIME NOT NULL,
   `status` INT(11) NOT NULL DEFAULT '0',
