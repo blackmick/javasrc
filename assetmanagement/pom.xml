@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.shawn.finance</groupId>
-    <artifactId>fsmdemo</artifactId>
+    <artifactId>assetmanagement</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>fsmdemo</name>
+    <name>assetmanagement</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -118,13 +118,13 @@
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.2</version>
-                <!--<dependencies>-->
-                    <!--<dependency>-->
-                        <!--<groupId>mysql</groupId>-->
-                        <!--<artifactId>mysql-connector-java</artifactId>-->
-                        <!--<version>5.1.34</version>-->
-                    <!--</dependency>-->
-                <!--</dependencies>-->
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.34</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

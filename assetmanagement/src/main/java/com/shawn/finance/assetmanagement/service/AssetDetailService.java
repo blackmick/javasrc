@@ -11,7 +11,7 @@ import java.util.List;
  * Created by shawn on 16/2/14.
  */
 @Service
-public class AssetService {
+public class AssetDetailService {
     @Autowired
     private AssetMapper assetDao;
 

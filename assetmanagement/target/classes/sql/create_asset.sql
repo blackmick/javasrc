@@ -4,10 +4,10 @@ DROP TABLE IF EXISTS tbl_asset_manager;
 
 CREATE TABLE tbl_asset_manager(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL DEFAULT '资产管理人名称',
-  `bank_name` VARCHAR(45) NOT NULL DEFAULT '资产管理人银行名称',
-  `branch_bank_name` VARCHAR(45) NOT NULL DEFAULT '资产管理人银行分行名称',
-  `bank_card` VARCHAR(45) NOT NULL DEFAULT '资产管理人银行账号',
+  `name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '资产管理人名称',
+  `bank_name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '资产管理人银行名称',
+  `branch_bank_name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '资产管理人银行分行名称',
+  `bank_card` VARCHAR(45) NOT NULL DEFAULT ''COMMENT '资产管理人银行账号',
   `bank_card_type` INT(11) NOT NULL DEFAULT '0',
   `create_time` DATETIME DEFAULT NULL,
   `update_time` DATETIME DEFAULT NULL,
@@ -48,12 +48,24 @@ CREATE TABLE tbl_asset_detail(
   `ap_id` BIGINT(20) NOT NULL COMMENT '资产管理计划id',
   `core_id` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '核心id,标识该资产明细属于哪个核心,适配多核心使用,当前使用一期核心,值为"core_v1"',
   `loan_id` VARCHAR(64) NOT NULL COMMENT '核心借据号',
-  `stage_id` VARCHAR(64) NOT NULL COMMENT '分期借据号',
-  `stage_no` INT(11) NOT NULL DEFAULT '1' COMMENT '分期期数',
+#   `stage_id` VARCHAR(64) NOT NULL COMMENT '分期借据号',
+  `period` INT(11) NOT NULL DEFAULT '1' COMMENT '分期期数',
+  `payment_periods` INT(11) NOT NULL DEFAULT '1' COMMENT '分期计划',
   `account_type` VARCHAR(32) NOT NULL DEFAULT '' COMMENT '账户类型:',
   `repay_duration` DATETIME NOT NULL COMMENT '还款期限',
-  `repaid` DOUBLE NOT NULL DEFAULT '0.0' COMMENT '已还金额',
-  `unrepay` DOUBLE NOT NULL DEFAULT '0.0' COMMENT '未还金额',
+  `recevable_amount` DECIMAL(10,2) DEFAULT '0.00' COMMENT '应还金额',
+  `repaid` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '已还金额',
+  `unrepaid` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '未还金额',
+  `amount_for_period` DECIMAL(10,2) DEFAULT '0.00' COMMENT '期供金额',
+  `principle_for_period` DECIMAL(10,2) DEFAULT '0.00' COMMENT '期供本金',
+  `repaid_principle` DECIMAL(10,2) DEFAULT '0.00' COMMENT '已还本金',
+  `cost_for_period` DECIMAL(10,2) DEFAULT '0.00' COMMENT '期供费用',
+  `repaid_cost` DECIMAL(10,2) DEFAULT '0.00' COMMENT '已还费用',
+  `interest_for_period` DECIMAL(10,2) DEFAULT '0.00' COMMENT '期供利息',
+  `repaid_interest` DECIMAL(10,2) DEFAULT '0.00' COMMENT '已还利息',
+  `fee` DECIMAL(10,2) DEFAULT '0.00' COMMENT '罚息',
+  `repaid_fee` DECIMAL(10,2) DEFAULT '0.00' COMMENT '已还罚息',
+  `compound_interest` DECIMAL(10,2) DEFAULT '0.00' COMMENT '复利',
   `repay_type` INT(11) NOT NULL DEFAULT '0' COMMENT '还款方式:0-等额本息,1-等额本金,2-先高后低',
 #   `corp_name` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '合作机构',
   `c_id` BIGINT(20) NOT NULL COMMENT '客户id',
@@ -72,7 +84,7 @@ CREATE TABLE tbl_asset_detail(
   `over_due_day` INT(11) NOT NULL DEFAULT '0' COMMENT '累计逾期天数',
   `max_over_due_day` INT(11) NOT NULL DEFAULT '0' COMMENT '历史最高逾期天数',
   `history_max_amount` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '历史最高金额',
-  `over_due_capital` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '逾期本金金额',
+  `over_due_principle` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '逾期本金金额',
   `over_due_interest` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '逾期利息金额',
   `account_age` INT NOT NULL DEFAULT '0' COMMENT '五级分类状态',
   `transfer_status` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '转让状态:0-未转让;1-以转让',
@@ -98,11 +110,11 @@ CREATE TABLE tbl_asset_customer(
 
 
 -- 商户信息
-DROP TABLE IF EXISTS tbl_merchant;
-CREATE TABLE tbl_merchant(
+DROP TABLE IF EXISTS tbl_asset_merchant;
+CREATE TABLE tbl_asset_merchant(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(120) NOT NULL DEFAULT '' COMMENT '商户总公司名称',
-  `branch_name` VARCHAR(200) NOT NULL DEFAULT '商户分公司名称',
+  `branch_name` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '商户分公司名称',
   `create_time` DATETIME NOT NULL,
   `update_time` DATETIME NOT NULL,
   `status` INT(11) NOT NULL DEFAULT '0',
@@ -111,8 +123,8 @@ CREATE TABLE tbl_merchant(
 
 -- 合作机构表
 -- 出表方
-DROP TABLE IF EXISTS tbl_corp;
-CREATE TABLE tbl_corp(
+DROP TABLE IF EXISTS tbl_asset_corp;
+CREATE TABLE tbl_asset_corp(
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '合作机构名',
   `create_time` DATETIME NOT NULL,
