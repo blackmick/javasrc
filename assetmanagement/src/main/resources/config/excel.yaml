@@ -1,0 +1,15 @@
+---
+class : Asset
+head:
+  -借据号
+  -分期期数
+  -分期还款日
+  -分期计划
+  -账户产品类型
+  -实际还款日
+  -还款状态
+  -当期应还金额
+properties:
+  -loanId
+  -period
+  -

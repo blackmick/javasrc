@@ -7,8 +7,8 @@
     <title>资产出表计划明细</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap/dist/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/js/jquery-2.2.0.js}"/>
-    <link rel="stylesheet" href="/fsmdemo/static/css/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/fsmdemo/static/js/jquery-2.2.0.js"/>
+    <link rel="stylesheet" href="/assetmanagement/static/css/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assetmanagement/static/js/jquery-2.2.0.js"/>
 </head>
 <body>
 <div class="container">
@@ -52,61 +52,61 @@
                 <th>供期本金</th>
                 <th>已还本金</th>
                 <th>期供费用</th>
-                <th>已还费用</th>
-                <th>期供利息</th>
-                <th>已还利息</th>
-                <th>罚息</th>
-                <th>复利</th>
-                <th>还款方式</th>
-                <th>机构名称</th>
-                <th>客户名称</th>
-                <th>客户性别</th>
-                <th>客户年龄</th>
-                <th>客户学历</th>
-                <th>客户职业</th>
-                <th>场景</th>
-                <th>商户总公司名称</th>
-                <th>商户分公司名称</th>
-                <th>合作机构名称</th>
-                <th>放款日期</th>
-                <th>贷款金额</th>
-                <th>贷款利率（月）</th>
-                <th>贷款期限</th>
-                <th>到期日</th>
-                <th>授信金额</th>
-                <th>贷款余额（截止目前）</th>
-                <th>担保类型</th>
-                <th>逾期情况</th>
-                <th>累计逾期次数</th>
-                <th>累计逾期天数</th>
-                <th>历史最高逾期天数</th>
-                <th>历史最高金额</th>
-                <th>逾期本金金额</th>
-                <th>逾期利息金额</th>
-                <th>客户所在区域</th>
-                <th>五级分类</th>
-                <th>转让状态</th>
-                <th>资产分类</th>
-                <th>月利率</th>
-                <th>月费率</th>
-                <th>是否贴息</th>
-                <th>贴息基数</th>
-                <th>贴息比例</th>
-                <th>摊销期限</th>
-                <th>应收摊销服务费</th>
-                <th>是否有免还期</th>
-                <th>免还期限</th>
-                <th>是否涉及先低后高</th>
-                <th>低还款额期限</th>
-                <th>低还款期限内每月本金还款比例</th>
-                <th>低还款额期限内利息还款比例</th>
+                <!--<th>已还费用</th>-->
+                <!--<th>期供利息</th>-->
+                <!--<th>已还利息</th>-->
+                <!--<th>罚息</th>-->
+                <!--<th>复利</th>-->
+                <!--<th>还款方式</th>-->
+                <!--<th>机构名称</th>-->
+                <!--<th>客户名称</th>-->
+                <!--<th>客户性别</th>-->
+                <!--<th>客户年龄</th>-->
+                <!--<th>客户学历</th>-->
+                <!--<th>客户职业</th>-->
+                <!--<th>场景</th>-->
+                <!--<th>商户总公司名称</th>-->
+                <!--<th>商户分公司名称</th>-->
+                <!--<th>合作机构名称</th>-->
+                <!--<th>放款日期</th>-->
+                <!--<th>贷款金额</th>-->
+                <!--<th>贷款利率（月）</th>-->
+                <!--<th>贷款期限</th>-->
+                <!--<th>到期日</th>-->
+                <!--<th>授信金额</th>-->
+                <!--<th>贷款余额（截止目前）</th>-->
+                <!--<th>担保类型</th>-->
+                <!--<th>逾期情况</th>-->
+                <!--<th>累计逾期次数</th>-->
+                <!--<th>累计逾期天数</th>-->
+                <!--<th>历史最高逾期天数</th>-->
+                <!--<th>历史最高金额</th>-->
+                <!--<th>逾期本金金额</th>-->
+                <!--<th>逾期利息金额</th>-->
+                <!--<th>客户所在区域</th>-->
+                <!--<th>五级分类</th>-->
+                <!--<th>转让状态</th>-->
+                <!--<th>资产分类</th>-->
+                <!--<th>月利率</th>-->
+                <!--<th>月费率</th>-->
+                <!--<th>是否贴息</th>-->
+                <!--<th>贴息基数</th>-->
+                <!--<th>贴息比例</th>-->
+                <!--<th>摊销期限</th>-->
+                <!--<th>应收摊销服务费</th>-->
+                <!--<th>是否有免还期</th>-->
+                <!--<th>免还期限</th>-->
+                <!--<th>是否涉及先低后高</th>-->
+                <!--<th>低还款额期限</th>-->
+                <!--<th>低还款期限内每月本金还款比例</th>-->
+                <!--<th>低还款额期限内利息还款比例</th>-->
             </tr>
             </thead>
             <tbody>
-            <tr th:each="manager : ${managers}">
-                <td th:text="${manager.name}">Onions</td>
-                <td th:text="${manager.bankName}">2.41</td>
-                <td th:text="${manager.branchBankName}">yes</td>
+            <tr th:each="asset : ${list}">
+                <td th:text="${asset.apId}">Onions</td>
+                <td th:text="${asset.period}">2.41</td>
+                <td th:text="${manager.paymentPeriods}">yes</td>
             </tr>
             </tbody>
         </table>
@@ -129,8 +129,13 @@
 
     <div>
         <button class="btn btn-default">删除资产</button>
-        <button class="btn btn-cancel">导出Excel</button>
+        <button class="btn btn-cancel" id="export-excel" href="/asset/export">导出Excel</button>
     </div>
 </div>
+<script style="javascript">
+//    $("#export-excel").onclick(function(){
+//        alert("onclick");
+//    });
+</script>
 </body>
 </html>
