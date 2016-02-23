@@ -13,7 +13,7 @@
 <body>
 <div class="container">
 
-    <form id="query-form" class="form-inline">
+    <form id="query-form" class="form-inline" method="post">
         <div class="form-group">
             <label for="managerName">管理人</label>
             <input type="text" id="managerName" class="form-control"/>
@@ -23,11 +23,12 @@
             <input type="text" id="bankName" class="form-control"/>
         </div>
 
-        <input type="submit" value="查询" class="btn btn-default"/>
+        <!--<input type="submit" value="查询" class="btn btn-default"/>-->
     </form>
 
     <div>
         <button class="btn btn-default">创建资产管理人</button>
+        <button id="query" class="btn btn-default" th:action="query">查询</button>
     </div>
 
     <div class="table">
@@ -40,8 +41,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="manager : ${managers}">
-                <td th:text="${manager.name}">Onions</td>
+            <tr th:each="manager : ${managers}" th:object="model">
+                <td th:text="${model.manager.name}">Onions</td>
                 <td th:text="${manager.bankName}">2.41</td>
                 <td th:text="${manager.branchBankName}">yes</td>
             </tr>
