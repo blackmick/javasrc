@@ -57,7 +57,7 @@ CREATE TABLE tbl_asset_plan (
 DROP TABLE IF EXISTS tbl_asset_detail;
 CREATE TABLE tbl_asset_detail (
   `id`                   BIGINT(20)     NOT NULL AUTO_INCREMENT,
-  `ap_id`                BIGINT(20)     NOT NULL
+  `plan_id`                BIGINT(20)     NOT NULL
   COMMENT '资产管理计划id',
   `core_id`              VARCHAR(64)    NOT NULL DEFAULT ''
   COMMENT '核心id,标识该资产明细属于哪个核心,适配多核心使用,当前使用一期核心,值为"core_v1"',
@@ -101,7 +101,7 @@ CREATE TABLE tbl_asset_detail (
   `repay_type`           INT(11)        NOT NULL DEFAULT '0'
   COMMENT '还款方式:0-等额本息,1-等额本金,2-先高后低',
   #   `corp_name` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '合作机构',
-  `c_id`                 BIGINT(20)     NOT NULL
+  `customer_id`                 BIGINT(20)     NOT NULL
   COMMENT '客户id',
   `corp_id`              BIGINT(20)     NOT NULL
   COMMENT '商户id',
