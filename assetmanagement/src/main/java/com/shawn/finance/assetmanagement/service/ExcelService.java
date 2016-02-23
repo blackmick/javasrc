@@ -1,6 +1,7 @@
 package com.shawn.finance.assetmanagement.service;
 
 import com.shawn.finance.assetmanagement.model.Asset;
+import com.sun.istack.internal.NotNull;
 import org.apache.commons.logging.Log;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,18 +15,51 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by shawn on 16/2/14.
  */
 public class ExcelService {
     private Logger logger = LoggerFactory.getLogger(ExcelService.class);
-    private HashMap<String, String> objMap = null;
+
+    private class ConfigMap{
+        private HashMap<String,String> headMap;
+        private HashMap<String,String> propertiesMap;
+
+        public void setHeadMap(HashMap<String, String> map){
+            this.headMap = map;
+        }
+
+        public HashMap<String, String> getHeadMap(){
+            return this.headMap;
+        }
+
+        public void setPropertiesMap(HashMap<String, String> map){
+            this.propertiesMap = map;
+        }
+
+        public HashMap<String, String> getPropertiesMap(){
+            return this.propertiesMap;
+        }
+    }
+
 
     public void loadMap(String fileName){
         Yaml yaml = new Yaml();
         try{
+            Cell cell = null;
             HashMap<String,Object> map = (HashMap<String, Object>)yaml.load(new FileInputStream(fileName));
+            Map<String,String> headMap = (HashMap<String, String>)map.get("head");
+            Map<String, String> propertiesMap = (HashMap<String, String>)map.get("properties");
+
+            Set<String> keys = headMap.keySet();
+            for(String key : keys){
+                int colIdx = Integer.parseInt(key);
+                String head = headMap.get(key);
+            }
+//            HashMap<String, String> headMap = (HashMap<String, String>) yaml.load(map.get("head").toString());
+            logger.info(headMap.toString());
         }catch (Exception ex){
             logger.error(ex.getMessage());
         }

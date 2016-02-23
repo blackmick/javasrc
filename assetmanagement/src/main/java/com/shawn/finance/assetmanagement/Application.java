@@ -22,10 +22,13 @@ public class Application {
     public static void main(String [] args){
 //        SpringApplication.run(Application.class);
         ExcelService es = new ExcelService();
-        ArrayList<Asset> list = new ArrayList<Asset>();
-        list.add(new Asset());
-        list.add(new Asset());
+//        ArrayList<Asset> list = new ArrayList<Asset>();
+//        list.add(new Asset());
+//        list.add(new Asset());
 //        es.write2Excel(list, "/tmp/test.xlsx", true);
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        String file = cl.getResource("config/excel.yaml").getFile();
+        es.loadMap(file);
     }
 
 }
