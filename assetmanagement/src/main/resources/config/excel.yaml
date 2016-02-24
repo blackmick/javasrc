@@ -1,5 +1,5 @@
 ---
-class : Asset
+class : com.shawn.finance.assetmanagement.model.AssetDetail
 head:
   0 : 借据号
   1 : 分期期数
